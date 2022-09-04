@@ -79,106 +79,14 @@ L3()
 L4()
 {
     cd $path/aosp
-    git clone https://$gitpassword@github.com/HMD-AOSP/android_device_nokia_Dragon.git -b android-13.0-PV device/nokia/Dragon
-    git clone https://$gitpassword@github.com/HMD-AOSP/android_device_nokia_Onyx.git -b android-13.0-PV device/nokia/Onyx
-    git clone https://$gitpassword@github.com/HMD-AOSP/android_device_nokia_Crystal.git -b android-13.0-PV device/nokia/Crystal
-    git clone https://$gitpassword@github.com/HMD-AOSP/android_device_nokia_Plate2.git -b android-13.0-PV device/nokia/Plate2
-    git clone https://$gitpassword@github.com/HMD-AOSP/android_device_nokia_Daredevil.git -b android-13.0-PV device/nokia/Daredevil
-    git clone https://$gitpassword@github.com/HMD-AOSP/android_device_nokia_Phoenix -b android-13.0-PV device/nokia/Phoenix
     git clone https://$gitpassword@github.com/HMD-AOSP/android_device_motorola_hanoip -b android-13.0-PV device/motorola/hanoip
-    git clone https://$gitpassword@github.com/HMD-AOSP/kernel-headers -b android-13.0 kernel/nokia/kernel-headers
     git clone https://$gitpassword@github.com/Motorola-SM6150/kernel-headers -b android-13.0 kernel/motorola/kernel-headers
     git clone https://$gitlpassword@gitlab.com/RaghuVarma331/proprietary_vendor_motorola -b android-13.0-PV --depth=1 vendor/motorola
-    git clone https://$gitlpassword@gitlab.com/RaghuVarma331/proprietary_vendor_nokia.git -b android-13.0-PV --depth=1 vendor/nokia
-    git clone https://$gitpassword@github.com/HMD-AOSP/proprietary_vendor_nokia_GoogleCamera -b android-13.0 vendor/nokia/GoogleCamera
 }
 
 L5()
 {
     cd $path/aosp
-    git clone https://$gitpassword@github.com/HMD-AOSP/proprietary_vendor_nokia_Os_Updates -b Dragon-HMD-AOSP vendor/nokia/Os_Updates
-    curl -s -X POST https://api.telegram.org/bot$Telegram_Api_code/sendMessage -d chat_id=$chat_id -d text="
-    
-    New HMD-AOSP for Nokia 6.1 Plus build started 
-    
-    $(date)
-    "
-    export SELINUX_IGNORE_NEVERALLOWS=true
-    . build/envsetup.sh && lunch aosp_Dragon-userdebug && make -j$(nproc --all) target-files-package otatools
-    sign_target_files_apks -o -d $path/keys $path/aosp/out/target/product/Dragon/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip $path/aosp/out/target/product/Dragon/signed-target-files.zip
-    ota_from_target_files -k $path/keys/releasekey $path/aosp/out/target/product/Dragon/signed-target-files.zip $path/aosp/out/target/product/Dragon/HMD-AOSP_Dragon-13.0-$CUSTOM_BUILD_DATE.zip
-    cp -r out/target/product/*/HMD-AOSP**.zip $path
-    rm -r out/target/product/*
-    rm -r vendor/nokia/Os_Updates
-    git clone https://$gitpassword@github.com/HMD-AOSP/proprietary_vendor_nokia_Os_Updates -b Onyx-HMD-AOSP vendor/nokia/Os_Updates
-    curl -s -X POST https://api.telegram.org/bot$Telegram_Api_code/sendMessage -d chat_id=$chat_id -d text="
-    
-    New HMD-AOSP for Nokia 7 Plus build started 
-    
-    $(date)
-    "
-    export SELINUX_IGNORE_NEVERALLOWS=true
-    . build/envsetup.sh && lunch aosp_Onyx-userdebug && make -j$(nproc --all) target-files-package otatools
-    sign_target_files_apks -o -d $path/keys $path/aosp/out/target/product/Onyx/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip $path/aosp/out/target/product/Onyx/signed-target-files.zip
-    ota_from_target_files -k $path/keys/releasekey $path/aosp/out/target/product/Onyx/signed-target-files.zip $path/aosp/out/target/product/Onyx/HMD-AOSP_Onyx-13.0-$CUSTOM_BUILD_DATE.zip
-    cp -r out/target/product/*/HMD-AOSP**.zip $path
-    rm -r out/target/product/*
-    rm -r vendor/nokia/Os_Updates
-    git clone https://$gitpassword@github.com/HMD-AOSP/proprietary_vendor_nokia_Os_Updates -b Crystal-HMD-AOSP vendor/nokia/Os_Updates
-    curl -s -X POST https://api.telegram.org/bot$Telegram_Api_code/sendMessage -d chat_id=$chat_id -d text="
-    
-    New HMD-AOSP for Nokia 7.1 build started 
-    
-    $(date)
-    "
-    export SELINUX_IGNORE_NEVERALLOWS=true
-    . build/envsetup.sh && lunch aosp_Crystal-userdebug && make -j$(nproc --all) target-files-package otatools
-    sign_target_files_apks -o -d $path/keys $path/aosp/out/target/product/Crystal/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip $path/aosp/out/target/product/Crystal/signed-target-files.zip
-    ota_from_target_files -k $path/keys/releasekey $path/aosp/out/target/product/Crystal/signed-target-files.zip $path/aosp/out/target/product/Crystal/HMD-AOSP_Crystal-13.0-$CUSTOM_BUILD_DATE.zip
-    cp -r out/target/product/*/HMD-AOSP**.zip $path
-    rm -r out/target/product/*
-    rm -r vendor/nokia/Os_Updates
-    git clone https://$gitpassword@github.com/HMD-AOSP/proprietary_vendor_nokia_Os_Updates -b Plate2-HMD-AOSP vendor/nokia/Os_Updates
-    curl -s -X POST https://api.telegram.org/bot$Telegram_Api_code/sendMessage -d chat_id=$chat_id -d text="
-    
-    New HMD-AOSP for Nokia 6.1 build started 
-    
-    $(date)
-    "
-    export SELINUX_IGNORE_NEVERALLOWS=true
-    . build/envsetup.sh && lunch aosp_Plate2-userdebug && make -j$(nproc --all) target-files-package otatools
-    sign_target_files_apks -o -d $path/keys $path/aosp/out/target/product/Plate2/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip $path/aosp/out/target/product/Plate2/signed-target-files.zip
-    ota_from_target_files -k $path/keys/releasekey $path/aosp/out/target/product/Plate2/signed-target-files.zip $path/aosp/out/target/product/Plate2/HMD-AOSP_Plate2-13.0-$CUSTOM_BUILD_DATE.zip
-    cp -r out/target/product/*/HMD-AOSP**.zip $path
-    rm -r out/target/product/*
-    rm -r vendor/nokia/Os_Updates
-    git clone https://$gitpassword@github.com/HMD-AOSP/proprietary_vendor_nokia_Os_Updates -b Daredevil-HMD-AOSP vendor/nokia/Os_Updates
-    curl -s -X POST https://api.telegram.org/bot$Telegram_Api_code/sendMessage -d chat_id=$chat_id -d text="
-    
-    New HMD-AOSP for Nokia 7.2 build started 
-    
-    $(date)
-    "
-    export SELINUX_IGNORE_NEVERALLOWS=true
-    . build/envsetup.sh && lunch aosp_Daredevil-userdebug && make -j$(nproc --all) target-files-package otatools
-    sign_target_files_apks -o -d $path/keys $path/aosp/out/target/product/Daredevil/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip $path/aosp/out/target/product/Daredevil/signed-target-files.zip
-    ota_from_target_files -k $path/keys/releasekey $path/aosp/out/target/product/Daredevil/signed-target-files.zip $path/aosp/out/target/product/Daredevil/HMD-AOSP_Daredevil-13.0-$CUSTOM_BUILD_DATE.zip
-    cp -r out/target/product/*/HMD-AOSP**.zip $path
-    rm -r out/target/product/*
-    curl -s -X POST https://api.telegram.org/bot$Telegram_Api_code/sendMessage -d chat_id=$chat_id -d text="
-    
-    New HMD-AOSP for Nokia 8.1 build started 
-    
-    $(date)
-    "
-    export SELINUX_IGNORE_NEVERALLOWS=true
-    . build/envsetup.sh && lunch aosp_Phoenix-userdebug && make -j$(nproc --all) target-files-package otatools
-    sign_target_files_apks -o -d $path/keys $path/aosp/out/target/product/Phoenix/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip $path/aosp/out/target/product/Phoenix/signed-target-files.zip
-    ota_from_target_files -k $path/keys/releasekey $path/aosp/out/target/product/Phoenix/signed-target-files.zip $path/aosp/out/target/product/Phoenix/HMD-AOSP_Phoenix-13.0-$CUSTOM_BUILD_DATE.zip
-    cp -r out/target/product/*/HMD-AOSP**.zip $path
-    rm -r out/target/product/*
-    curl -s -X POST https://api.telegram.org/bot$Telegram_Api_code/sendMessage -d chat_id=$chat_id -d text="
-    
     New HMD-AOSP for Moto G60 build started 
     
     $(date)
